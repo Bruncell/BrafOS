@@ -13,28 +13,25 @@ void main()
 int CursorX = 0;
 int CursorY = 0;
 
-
+uint16_t color = rgb555(0, 0, 200);
 
 
 while(1)
 {
 
-uint8_t scancode = read_scancode();
+	uint8_t KeyCode = ReadKey();
+	if(KeyCode == 0)
+	continue;
 
-
-     if (scancode & 0x80)
-              continue;
-
-          
-uint16_t color = rgb555(0, 0, 200);
-          
-              DrawLetter(CursorX, CursorY, 0xFFFF, color, scancode);
-                CursorX++;
-                if (CursorX >= WIDTH / 20) 
-                {
-                    CursorX = 0;
-                    CursorY++;
-                }
+   
+	DrawLetter(CursorX, CursorY, 0xFFFF, color, KeyCode);
+	CursorX++;
+	
+	if (CursorX >= WIDTH / 8) 
+	{
+	CursorX = 0;
+	CursorY++;
+	}
             
 }
 
